@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
 using Foundation;
 using UIKit;
+using Xamarin.Forms.Platform.iOS;
 using Xamarin.Plugins.AWS.SNS.Helpers;
 
 namespace Xamarin.Plugins.AWS.SNS.iOS
@@ -12,7 +10,7 @@ namespace Xamarin.Plugins.AWS.SNS.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public class AppDelegate : FormsApplicationDelegate
     {
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -23,13 +21,14 @@ namespace Xamarin.Plugins.AWS.SNS.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+            Forms.Forms.Init();
             LoadApplication(new App());
             /* Ask to Authorize Push Messaging */
             if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
             {
                 var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Sound |
-                                           UIUserNotificationType.Alert | UIUserNotificationType.Badge, null);
+                                                                              UIUserNotificationType.Alert |
+                                                                              UIUserNotificationType.Badge, null);
 
                 UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
                 UIApplication.SharedApplication.RegisterForRemoteNotifications();
@@ -37,7 +36,8 @@ namespace Xamarin.Plugins.AWS.SNS.iOS
             else
             {
                 UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(UIRemoteNotificationType.Badge |
-                                                                         UIRemoteNotificationType.Sound | UIRemoteNotificationType.Alert);
+                                                                                   UIRemoteNotificationType.Sound |
+                                                                                   UIRemoteNotificationType.Alert);
             }
             /* Ask to Authorize Push Messaging */
             return base.FinishedLaunching(app, options);
@@ -52,7 +52,8 @@ namespace Xamarin.Plugins.AWS.SNS.iOS
             }
         }
 
-        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo,
+            Action<UIBackgroundFetchResult> completionHandler)
         {
             var payload = DictionaryToJson(userInfo);
             SNSUtils.HandleMessage(payload);

@@ -22,17 +22,20 @@ namespace Xamarin.Plugins.AWS.SNS.Helpers
             get { return AppSettings.GetValueOrDefault(ARNKey, ARNDefault); }
             set { AppSettings.AddOrUpdateValue(ARNKey, value); }
         }
+
         public static string Uid
         {
             get { return AppSettings.GetValueOrDefault(memberUidKey, memberUidDefault); }
             set { AppSettings.AddOrUpdateValue(memberUidKey, value); }
         }
+
         #region Setting Constants
 
         private static readonly string ARNKey = "ARN";
         private static readonly string ARNDefault = string.Empty;
         private static readonly string memberUidKey = "Uid";
         private static readonly string memberUidDefault = string.Empty;
+
         #endregion
     }
 }

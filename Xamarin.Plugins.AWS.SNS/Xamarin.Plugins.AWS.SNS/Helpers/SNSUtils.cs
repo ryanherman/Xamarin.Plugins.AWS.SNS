@@ -61,25 +61,25 @@ namespace Xamarin.Plugins.AWS.SNS.Helpers
 
             if (rootObject.type != null)
             {
-                    return;
+                return;
             }
 
-                switch (rootObject.type)
-                {
-                    case "1":
-                        //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send(new MainLoader(), "ShowTickets"));
-                        break;
-                    case "2":
-                        //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send(new MainLoader(), "ShowTickets"));
-                        break;
-                    case "3":
-                        //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send(new MainLoader(), "ReservedTickets"));
-                        break;
-                    default:
-                        break;
-                }
+            switch (rootObject.type)
+            {
+                case "1":
+                    //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send(new MainLoader(), "ShowTickets"));
+                    break;
+                case "2":
+                    //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send(new MainLoader(), "ShowTickets"));
+                    break;
+                case "3":
+                    //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send(new MainLoader(), "ReservedTickets"));
+                    break;
+                default:
+                    break;
             }
-        
+        }
+
 
         public static async void UpdateUser(string Uid)
         {
@@ -96,7 +96,6 @@ namespace Xamarin.Plugins.AWS.SNS.Helpers
                 {
                     // Someone has deleted the ARN from the server manually, need to uninstall the app to get a new ARN, or eventually re-register the device here
                 }
-                
             }
         }
 

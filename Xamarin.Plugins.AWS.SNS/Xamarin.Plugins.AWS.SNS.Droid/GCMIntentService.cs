@@ -82,7 +82,6 @@ namespace Xamarin.Plugins.AWS.SNS.Droid
                 {
                     var value = intent.Extras.Get(key).ToString();
                     values.Add(key, value);
-
                 }
                 var message = intent.Extras.GetString("message");
 
@@ -91,24 +90,27 @@ namespace Xamarin.Plugins.AWS.SNS.Droid
             }
         }
 
-        private void CreateNotification(string title, string desc,  Bundle extras)
+        private void CreateNotification(string title, string desc, Bundle extras)
         {
             // Create notification
             var notificationManager = GetSystemService(NotificationService) as NotificationManager;
 
             // Create an intent to show UI
-            var uiIntent = new Intent(this, typeof(MainActivity));
+            var uiIntent = new Intent(this, typeof (MainActivity));
 
-            if (extras != null) { uiIntent.PutExtras(extras); }
-          
+            if (extras != null)
+            {
+                uiIntent.PutExtras(extras);
+            }
+
             // Create the notification
             var builder = new NotificationCompat.Builder(this);
-            
-            Notification notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
-            .SetSmallIcon(Android.Resource.Drawable.IcMenuAgenda).SetTicker(desc)
-            //.SetLargeIcon(BitmapFactory.DecodeResource(Resources, Resource.Drawable.iota))
-            .SetAutoCancel(true).SetContentTitle(title)
-            .SetContentText(desc).Build();
+
+            var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
+                .SetSmallIcon(Android.Resource.Drawable.IcMenuAgenda).SetTicker(desc)
+                //.SetLargeIcon(BitmapFactory.DecodeResource(Resources, Resource.Drawable.iota))
+                .SetAutoCancel(true).SetContentTitle(title)
+                .SetContentText(desc).Build();
 
             // Auto cancel will remove the notification once the user touches it
             notification.Flags = NotificationFlags.AutoCancel;

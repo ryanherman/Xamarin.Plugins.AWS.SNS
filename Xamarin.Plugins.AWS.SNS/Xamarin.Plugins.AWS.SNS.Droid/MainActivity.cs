@@ -3,19 +3,21 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Newtonsoft.Json.Linq;
+using Xamarin.Forms.Platform.Android;
 using Xamarin.Plugins.AWS.SNS.Helpers;
 using Debug = System.Diagnostics.Debug;
 
 namespace Xamarin.Plugins.AWS.SNS.Droid
 {
-    [Activity(Label = "Xamarin.Plugins.AWS.SNS", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
+    [Activity(Label = "Xamarin.Plugins.AWS.SNS", Icon = "@drawable/icon", MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : FormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
+            Forms.Forms.Init(this, bundle);
             RegisterForGCM();
             LoadApplication(new App());
             if (Intent.Extras != null && !Intent.Extras.IsEmpty)
@@ -44,4 +46,3 @@ namespace Xamarin.Plugins.AWS.SNS.Droid
         }
     }
 }
-
